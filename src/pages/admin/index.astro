@@ -1,0 +1,171 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductsTab from "../../components/admin/ProductsTab.astro";
+import ServicesTab from "../../components/admin/ServicesTab.astro";
+
+// In a real application, you would implement authentication here
+const isAuthenticated = true;
+
+// Get the active tab from URL parameter, default to dashboard
+const activeTab = Astro.url.searchParams.get("tab") || "dashboard";
+
+const getTabUrl = (tab: string) => {
+  const url = new URL(Astro.url);
+  url.searchParams.set("tab", tab);
+  return url.pathname + url.search;
+};
+---
+
+<Layout title="Admin Dashboard">
+  {
+    isAuthenticated ? (
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-center mb-8">Admin Dashboard</h1>
+
+        <div class="border-b border-gray-200 mb-8">
+          <nav class="-mb-px flex space-x-8 justify-center" aria-label="Tabs">
+            <a
+              href="/admin?tab=dashboard"
+              class:list={[
+                "py-4 px-1 border-b-2 font-medium text-sm cursor-pointer",
+                activeTab === "dashboard"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+              ]}
+            >
+              Dashboard
+            </a>
+            <a
+              href="/admin?tab=products"
+              class:list={[
+                "py-4 px-1 border-b-2 font-medium text-sm cursor-pointer",
+                activeTab === "products"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+              ]}
+            >
+              Products
+            </a>
+            <a
+              href="/admin?tab=services"
+              class:list={[
+                "py-4 px-1 border-b-2 font-medium text-sm cursor-pointer",
+                activeTab === "services"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+              ]}
+            >
+              Services
+            </a>
+          </nav>
+        </div>
+
+        {activeTab === "dashboard" && (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold mb-4">Analytics Overview</h2>
+              <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded">
+                  <p class="font-medium">Today's Appointments</p>
+                  <p class="text-2xl font-bold text-primary">8</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded">
+                  <p class="font-medium">Weekly Revenue</p>
+                  <p class="text-2xl font-bold text-primary">$2,450</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded">
+                  <p class="font-medium">Monthly Customers</p>
+                  <p class="text-2xl font-bold text-primary">145</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold mb-4">Recent Appointments</h2>
+              <div class="space-y-4">
+                <div class="p-4 bg-gray-50 rounded">
+                  <p class="font-medium">Sarah Johnson</p>
+                  <p class="text-sm text-gray-600">Haircut & Styling</p>
+                  <p class="text-sm text-gray-600">Today at 2:00 PM</p>
+                </div>
+                <div class="p-4 bg-gray-50 rounded">
+                  <p class="font-medium">Mike Smith</p>
+                  <p class="text-sm text-gray-600">Color & Highlights</p>
+                  <p class="text-sm text-gray-600">Tomorrow at 10:00 AM</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+              <div class="space-y-3">
+                <button class="btn btn-primary w-full">
+                  Add New Appointment
+                </button>
+                <button class="btn btn-secondary w-full">
+                  Update Inventory
+                </button>
+                <button class="btn btn-secondary w-full">
+                  Modify Services
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "products" && <ProductsTab />}
+
+        {activeTab === "services" && <ServicesTab />}
+      </div>
+    ) : (
+      <div class="max-w-md mx-auto mt-20 p-6 bg-white rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center mb-6">Admin Login</h1>
+        <form class="space-y-4">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="input mt-1"
+            />
+          </div>
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="input mt-1"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary w-full">
+            Sign In
+          </button>
+        </form>
+      </div>
+    )
+  }
+</Layout>
+
+<script>
+  // Only handle form submission
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log("Login attempted");
+      });
+    }
+  });
+</script>

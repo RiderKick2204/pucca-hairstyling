@@ -1,0 +1,209 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const products = [
+  {
+    id: 1,
+    name: "Professional Shampoo",
+    description: "Sulfate-free shampoo for all hair types",
+    price: 24.99,
+    category: "Shampoo",
+  },
+  {
+    id: 2,
+    name: "Deep Conditioning Mask",
+    description: "Intensive repair treatment for damaged hair",
+    price: 34.99,
+    category: "Treatment",
+  },
+  {
+    id: 3,
+    name: "Heat Protection Spray",
+    description: "Protects hair from heat styling damage",
+    price: 19.99,
+    category: "Styling",
+  },
+  {
+    id: 4,
+    name: "Argan Oil Serum",
+    description: "Smoothing and shine-enhancing hair serum",
+    price: 29.99,
+    category: "Treatment",
+  },
+  {
+    id: 5,
+    name: "Volume Boost Mousse",
+    description: "Lightweight mousse for added volume",
+    price: 21.99,
+    category: "Styling",
+  },
+  {
+    id: 6,
+    name: "Professional Conditioner",
+    description: "Moisturizing conditioner for daily use",
+    price: 22.99,
+    category: "Conditioner",
+  },
+];
+
+const categories = [...new Set(products.map((product) => product.category))];
+---
+
+<Layout title="Hair Care Products">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-center">Hair Care Products</h1>
+
+    <div class="mt-8">
+      <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button class="btn btn-secondary filter-btn active" data-category="all"
+          >All</button
+        >
+        {
+          categories.map((category) => (
+            <button
+              class="btn btn-secondary filter-btn"
+              data-category={category}
+            >
+              {category}
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="products-grid"
+      >
+        {
+          products.map((product) => (
+            <div
+              class="bg-white p-6 rounded-lg shadow-md product-card"
+              data-category={product.category}
+            >
+              <div class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg mb-4">
+                <div class="flex items-center justify-center h-48 bg-gray-100 rounded-lg">
+                  <span class="text-gray-400">Product Image</span>
+                </div>
+              </div>
+              <h3>{product.name}</h3>
+              <p class="text-gray-600 mb-4">{product.description}</p>
+              <div class="flex justify-between items-center">
+                <span class="text-lg font-semibold">${product.price}</span>
+                <button
+                  class="btn btn-primary"
+                  onclick={`handleOrder(${product.id})`}
+                >
+                  Order Now
+                </button>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  interface Product {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+  }
+
+  const products: Product[] = [
+    {
+      id: 1,
+      name: "Professional Shampoo",
+      description: "Sulfate-free shampoo for all hair types",
+      price: 24.99,
+      category: "Shampoo",
+    },
+    {
+      id: 2,
+      name: "Deep Conditioning Mask",
+      description: "Intensive repair treatment for damaged hair",
+      price: 34.99,
+      category: "Treatment",
+    },
+    {
+      id: 3,
+      name: "Heat Protection Spray",
+      description: "Protects hair from heat styling damage",
+      price: 19.99,
+      category: "Styling",
+    },
+    {
+      id: 4,
+      name: "Argan Oil Serum",
+      description: "Smoothing and shine-enhancing hair serum",
+      price: 29.99,
+      category: "Treatment",
+    },
+    {
+      id: 5,
+      name: "Volume Boost Mousse",
+      description: "Lightweight mousse for added volume",
+      price: 21.99,
+      category: "Styling",
+    },
+    {
+      id: 6,
+      name: "Professional Conditioner",
+      description: "Moisturizing conditioner for daily use",
+      price: 22.99,
+      category: "Conditioner",
+    },
+  ];
+
+  // Filter functionality
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const productCards = document.querySelectorAll(".product-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category");
+
+      // Update active button
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      // Filter products
+      productCards.forEach((card) => {
+        const htmlCard = card as HTMLElement;
+        if (
+          category === "all" ||
+          card.getAttribute("data-category") === category
+        ) {
+          htmlCard.style.display = "block";
+        } else {
+          htmlCard.style.display = "none";
+        }
+      });
+    });
+  });
+
+  // Order handling
+  declare global {
+    interface Window {
+      handleOrder: (productId: number) => void;
+    }
+  }
+
+  window.handleOrder = (productId: number) => {
+    const product = products.find((p: Product) => p.id === productId);
+    if (product) {
+      alert(
+        `Thank you for your interest in ${product.name}! Please visit our salon to purchase this product.`
+      );
+    }
+  };
+</script>
+
+<style>
+  .filter-btn.active {
+    @apply bg-primary text-white;
+  }
+</style>
