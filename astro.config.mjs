@@ -5,7 +5,7 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://riderkick2204.github.io/.github.io',
+  site: 'https://riderkick2204.github.io',
   base: 'pucca-hairstyling',
   integrations: [tailwind()],
   output: "server",
