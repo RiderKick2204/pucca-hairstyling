@@ -1,13 +1,12 @@
-import { o as decryptString, p as createSlotValueFromString, q as isAstroComponentFactory, r as renderTemplate, i as renderComponent, R as ROUTE_TYPE_HEADER, u as REROUTE_DIRECTIVE_HEADER, A as AstroError, v as i18nNoLocaleFoundInPath, w as ResponseSentError, x as MiddlewareNoDataOrNextCalled, y as MiddlewareNotAResponse, z as originPathnameSymbol, B as RewriteWithBodyUsed, G as GetStaticPathsRequired, C as InvalidGetStaticPathsReturn, D as InvalidGetStaticPathsEntry, H as GetStaticPathsExpectedParams, J as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, K as DEFAULT_404_COMPONENT, O as NoMatchingStaticPathFound, Q as PrerenderDynamicEndpointPathCollide, S as ReservedSlotName, T as renderSlotToString, V as renderJSX, W as chunkToString, X as isRenderInstruction, Y as ForbiddenRewrite, Z as SessionStorageSaveError, _ as SessionStorageInitError, $ as ASTRO_VERSION, a0 as LocalsReassigned, a1 as PrerenderClientAddressNotAvailable, a2 as clientAddressSymbol, a3 as ClientAddressNotAvailable, a4 as StaticClientAddressNotAvailable, a5 as AstroResponseHeadersReassigned, a6 as responseSentSymbol$1, a7 as renderPage, a8 as REWRITE_DIRECTIVE_HEADER_KEY, a9 as REWRITE_DIRECTIVE_HEADER_VALUE, aa as renderEndpoint, ab as LocalsNotAnObject, ac as REROUTABLE_STATUS_CODES } from './astro/server_C7Xamz13.mjs';
+import { i as decryptString, j as createSlotValueFromString, k as isAstroComponentFactory, r as renderTemplate, d as renderComponent, R as ROUTE_TYPE_HEADER, l as REROUTE_DIRECTIVE_HEADER, A as AstroError, n as i18nNoLocaleFoundInPath, o as ResponseSentError, M as MiddlewareNoDataOrNextCalled, p as MiddlewareNotAResponse, q as originPathnameSymbol, s as RewriteWithBodyUsed, G as GetStaticPathsRequired, I as InvalidGetStaticPathsReturn, t as InvalidGetStaticPathsEntry, u as GetStaticPathsExpectedParams, v as GetStaticPathsInvalidRouteParam, P as PageNumberParamNotFound, D as DEFAULT_404_COMPONENT, N as NoMatchingStaticPathFound, w as PrerenderDynamicEndpointPathCollide, x as ReservedSlotName, y as renderSlotToString, z as renderJSX, B as chunkToString, C as isRenderInstruction, F as ForbiddenRewrite, S as SessionStorageSaveError, E as SessionStorageInitError, H as ASTRO_VERSION, L as LocalsReassigned, J as PrerenderClientAddressNotAvailable, K as clientAddressSymbol, O as ClientAddressNotAvailable, Q as StaticClientAddressNotAvailable, T as AstroResponseHeadersReassigned, U as responseSentSymbol$1, V as renderPage, W as REWRITE_DIRECTIVE_HEADER_KEY, X as REWRITE_DIRECTIVE_HEADER_VALUE, Y as renderEndpoint, Z as LocalsNotAnObject, _ as REROUTABLE_STATUS_CODES } from './astro/server_Cj3Zq92x.mjs';
 import { bold, red, yellow, dim, blue } from 'kleur/colors';
 import 'clsx';
 import { serialize, parse } from 'cookie';
-import { g as getActionQueryString, d as deserializeActionResult, D as DEFAULT_404_ROUTE, a as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_DzFzdlBN.mjs';
+import { g as getActionQueryString, d as deserializeActionResult, D as DEFAULT_404_ROUTE, a as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_BLK5Rw-E.mjs';
 import 'es-module-lexer';
 import buffer from 'node:buffer';
 import crypto$1 from 'node:crypto';
 import { Http2ServerResponse } from 'node:http2';
-import { a as appendForwardSlash$1, j as joinPaths, r as removeTrailingForwardSlash, t as trimSlashes, f as fileExtension, s as slash, p as prependForwardSlash$1, c as collapseDuplicateTrailingSlashes, h as hasFileExtension } from './path_BuZodYwm.mjs';
 import { unflatten as unflatten$1, stringify as stringify$1 } from 'devalue';
 import { createStorage, builtinDrivers } from 'unstorage';
 import { AsyncLocalStorage } from 'node:async_hooks';
@@ -19,6 +18,54 @@ import os from 'node:os';
 import path from 'node:path';
 import url from 'node:url';
 import send from 'send';
+
+function appendForwardSlash$1(path) {
+  return path.endsWith("/") ? path : path + "/";
+}
+function prependForwardSlash$1(path) {
+  return path[0] === "/" ? path : "/" + path;
+}
+const MANY_TRAILING_SLASHES = /\/{2,}$/g;
+function collapseDuplicateTrailingSlashes(path, trailingSlash) {
+  if (!path) {
+    return path;
+  }
+  return path.replace(MANY_TRAILING_SLASHES, trailingSlash ? "/" : "") || "/";
+}
+function removeTrailingForwardSlash(path) {
+  return path.endsWith("/") ? path.slice(0, path.length - 1) : path;
+}
+function removeLeadingForwardSlash(path) {
+  return path.startsWith("/") ? path.substring(1) : path;
+}
+function trimSlashes(path) {
+  return path.replace(/^\/|\/$/g, "");
+}
+function isString(path) {
+  return typeof path === "string" || path instanceof String;
+}
+function joinPaths(...paths) {
+  return paths.filter(isString).map((path, i) => {
+    if (i === 0) {
+      return removeTrailingForwardSlash(path);
+    } else if (i === paths.length - 1) {
+      return removeLeadingForwardSlash(path);
+    } else {
+      return trimSlashes(path);
+    }
+  }).join("/");
+}
+function slash(path) {
+  return path.replace(/\\/g, "/");
+}
+function fileExtension(path) {
+  const ext = path.split(".").pop();
+  return ext !== path ? `.${ext}` : "";
+}
+const WITH_FILE_EXT = /\/[^/]+\.\w+$/;
+function hasFileExtension(path) {
+  return WITH_FILE_EXT.test(path);
+}
 
 function shouldAppendForwardSlash(trailingSlash, buildFormat) {
   switch (trailingSlash) {

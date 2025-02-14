@@ -1,4 +1,4 @@
-import { ad as NOOP_MIDDLEWARE_HEADER, K as DEFAULT_404_COMPONENT } from './astro/server_C7Xamz13.mjs';
+import { $ as NOOP_MIDDLEWARE_HEADER, D as DEFAULT_404_COMPONENT } from './astro/server_Cj3Zq92x.mjs';
 import { parse } from 'devalue';
 import { escape } from 'html-escaper';
 
@@ -11,7 +11,7 @@ const NOOP_MIDDLEWARE_FN = async (_ctx, next) => {
 const ACTION_QUERY_PARAMS = {
   actionName: "_action"};
 
-const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/my-repo", "DEV": false, "MODE": "production", "PROD": true, "SITE": "https://pucca-hairstyling.pages.github.io", "SSR": true};
+const __vite_import_meta_env__ = {"ASSETS_PREFIX": undefined, "BASE_URL": "/", "DEV": false, "MODE": "production", "PROD": true, "SITE": undefined, "SSR": true};
 const codeToStatusMap = {
   // Implemented from tRPC error code table
   // https://trpc.io/docs/server/error-handling#error-codes

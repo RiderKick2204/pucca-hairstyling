@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = ".netlify/functions-internal"
+
+[dev]
+  framework = "astro"
+  targetPort = 3000
+
+[[redirects]]
+  from = "/_astro/*"
+  to = "/.netlify/functions/entry-server"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  included_files = ["dist/**/*"]
+  external_node_modules = ["@astrojs/*"]
+
+[[edge_functions]]
+  function = "entry"
+  path = "/*"

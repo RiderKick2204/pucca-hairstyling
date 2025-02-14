@@ -1,20 +1,18 @@
 import { renderers } from './renderers.mjs';
-import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_JyFOVDZf.mjs';
-import { manifest } from './manifest_Co0_USc3.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_Dpw4aX3M.mjs';
+import { manifest } from './manifest_5aQuo3Lb.mjs';
 
 const serverIslandMap = new Map();;
 
-const _page0 = () => import('./pages/_image.astro.mjs');
-const _page1 = () => import('./pages/admin.astro.mjs');
-const _page2 = () => import('./pages/products.astro.mjs');
-const _page3 = () => import('./pages/services.astro.mjs');
-const _page4 = () => import('./pages/index.astro.mjs');
+const _page0 = () => import('./pages/admin.astro.mjs');
+const _page1 = () => import('./pages/products.astro.mjs');
+const _page2 = () => import('./pages/services.astro.mjs');
+const _page3 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
-    ["node_modules/astro/dist/assets/endpoint/generic.js", _page0],
-    ["src/pages/admin/index.astro", _page1],
-    ["src/pages/products.astro", _page2],
-    ["src/pages/services.astro", _page3],
-    ["src/pages/index.astro", _page4]
+    ["src/pages/admin/index.astro", _page0],
+    ["src/pages/products.astro", _page1],
+    ["src/pages/services.astro", _page2],
+    ["src/pages/index.astro", _page3]
 ]);
 
 const _manifest = Object.assign(manifest, {
