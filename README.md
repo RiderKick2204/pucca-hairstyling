@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-# pucca-hairstyling
 Pucca's products and services for hairstyling
 =======
 # Astro Starter Kit: Basics
