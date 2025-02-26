@@ -42,7 +42,7 @@ import "../styles/global.css";
               <span class="sr-only">Open main menu</span>
               <!-- Hamburger icon -->
               <svg
-                class="h-6 w-6"
+                class="h-6 w-6 menu-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -54,6 +54,21 @@ import "../styles/global.css";
                   stroke-linejoin="round"
                   stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+              <!-- X icon -->
+              <svg
+                class="h-6 w-6 close-icon hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
           </div>
@@ -148,8 +163,13 @@ import "../styles/global.css";
   const mobileMenu = document.getElementById("mobile-menu");
 
   if (mobileMenuButton && mobileMenu) {
+    const menuIcon = mobileMenuButton.querySelector(".menu-icon");
+    const closeIcon = mobileMenuButton.querySelector(".close-icon");
+
     mobileMenuButton.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
+      menuIcon?.classList.toggle("hidden");
+      closeIcon?.classList.toggle("hidden");
     });
   }
 
