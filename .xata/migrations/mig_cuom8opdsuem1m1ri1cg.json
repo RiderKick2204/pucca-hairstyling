@@ -1,0 +1,25 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuom8opdsuem1m1ri1cg",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Product",
+          "column": {
+            "name": "stock",
+            "type": "int",
+            "comment": "",
+            "default": "'10'",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuom8opdsuem1m1ri1cg",
+  "parent": "mig_cuom2q6fvuvgoi6as4qg",
+  "schema": "public",
+  "startedAt": "2025-02-16T04:06:59.957335Z"
+}

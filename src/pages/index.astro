@@ -5,25 +5,34 @@ import Layout from "../layouts/Layout.astro";
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout title="Welcome">
+<Layout
+  title="Welcome"
+  description="Experience the art of beautiful hair with Pucca Hairstyling. Book professional haircuts, styling, color, highlights, and hair treatments in our salon."
+>
   <div class="bg-gradient-to-r from-primary to-secondary text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-24">
       <div class="text-center">
-        <h1 class="text-5xl font-bold mb-6">Welcome to Pucca Hairstyling</h1>
-        <p class="text-xl mb-8">
+        <h1 class="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">
+          Welcome to Pucca Hairstyling
+        </h1>
+        <p class="text-lg sm:text-xl mb-6 sm:mb-8">
           Experience the art of beautiful hair with our professional styling
           services
         </p>
-        <a href="/services" class="btn bg-white text-primary hover:bg-gray-100"
+        <a
+          href="/services"
+          class="btn bg-white text-primary hover:bg-gray-100 text-sm sm:text-base"
           >Book Now</a
         >
       </div>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-center mb-12">Our Featured Services</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <h2 class="text-center text-2xl sm:text-3xl mb-8 sm:mb-12">
+      Our Featured Services
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
       <div class="bg-white p-6 rounded-lg shadow-md">
         <h3>Haircut & Styling</h3>
         <p class="text-gray-600 mb-4">
@@ -56,9 +65,11 @@ import Layout from "../layouts/Layout.astro";
   </div>
 
   <div class="bg-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <h2 class="text-center mb-12">Why Choose Us?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <h2 class="text-center text-2xl sm:text-3xl mb-8 sm:mb-12">
+        Why Choose Us?
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 text-center">
         <div>
           <div class="text-4xl text-primary mb-4">10+</div>
           <p class="font-semibold">Years Experience</p>

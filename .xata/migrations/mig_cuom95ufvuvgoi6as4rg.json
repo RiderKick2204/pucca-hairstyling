@@ -1,0 +1,25 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuom95ufvuvgoi6as4rg",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Product",
+          "column": {
+            "name": "Status",
+            "type": "text",
+            "comment": "",
+            "default": "'In stock'",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuom95ufvuvgoi6as4rg",
+  "parent": "mig_cuom8opdsuem1m1ri1cg",
+  "schema": "public",
+  "startedAt": "2025-02-16T04:07:52.448886Z"
+}

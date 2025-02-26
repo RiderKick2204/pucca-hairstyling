@@ -49,19 +49,23 @@ const products = [
 const categories = [...new Set(products.map((product) => product.category))];
 ---
 
-<Layout title="Hair Care Products">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-center">Hair Care Products</h1>
+<Layout
+  title="Hair Care Products"
+  description="Discover Pucca Hairstyling's premium hair care products. Shop professional shampoos, conditioners, treatments, and styling products online."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-center text-3xl sm:text-4xl">Hair Care Products</h1>
 
     <div class="mt-8">
-      <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <button class="btn btn-secondary filter-btn active" data-category="all"
-          >All</button
+      <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8">
+        <button
+          class="btn btn-secondary filter-btn active text-sm sm:text-base"
+          data-category="all">All</button
         >
         {
           categories.map((category) => (
             <button
-              class="btn btn-secondary filter-btn"
+              class="btn btn-secondary filter-btn text-sm sm:text-base"
               data-category={category}
             >
               {category}
@@ -71,13 +75,13 @@ const categories = [...new Set(products.map((product) => product.category))];
       </div>
 
       <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8"
         id="products-grid"
       >
         {
           products.map((product) => (
             <div
-              class="bg-white p-6 rounded-lg shadow-md product-card"
+              class="bg-white p-4 sm:p-6 rounded-lg shadow-md product-card"
               data-category={product.category}
             >
               <div class="aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg mb-4">
@@ -196,7 +200,7 @@ const categories = [...new Set(products.map((product) => product.category))];
     const product = products.find((p: Product) => p.id === productId);
     if (product) {
       alert(
-        `Thank you for your interest in ${product.name}! Please visit our salon to purchase this product.`
+        `Thank you for your interest in ${product.name}! Please visit our salon to purchase this product.`,
       );
     }
   };

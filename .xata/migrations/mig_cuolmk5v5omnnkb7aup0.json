@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuolmk5v5omnnkb7aup0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Product",
+          "column": {
+            "name": "price",
+            "type": "float",
+            "comment": "",
+            "default": "'29.99'"
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuolmk5v5omnnkb7aup0",
+  "parent": "mig_cuolis5v5omnnkb7auo0",
+  "schema": "public",
+  "startedAt": "2025-02-16T03:28:17.466905Z"
+}

@@ -1,0 +1,20 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuom9lufvuvgoi6as4sg",
+    "operations": [
+      {
+        "alter_column": {
+          "name": "status",
+          "table": "Product",
+          "column": "Status"
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuom9lufvuvgoi6as4sg",
+  "parent": "mig_cuom95ufvuvgoi6as4rg",
+  "schema": "public",
+  "startedAt": "2025-02-16T04:08:56.166403Z"
+}

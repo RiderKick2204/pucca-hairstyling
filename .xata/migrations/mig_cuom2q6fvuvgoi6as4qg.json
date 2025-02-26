@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuom2q6fvuvgoi6as4qg",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Product",
+          "column": {
+            "name": "price",
+            "type": "float",
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuom2q6fvuvgoi6as4qg",
+  "parent": "mig_cuom2m5v5omnnkb7aut0",
+  "schema": "public",
+  "startedAt": "2025-02-16T03:54:16.807129Z"
+}

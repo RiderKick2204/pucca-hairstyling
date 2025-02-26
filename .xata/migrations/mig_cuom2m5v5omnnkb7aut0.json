@@ -1,0 +1,24 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cuom2m5v5omnnkb7aut0",
+    "operations": [
+      {
+        "add_column": {
+          "table": "Product",
+          "column": {
+            "name": "name",
+            "type": "text",
+            "comment": "",
+            "nullable": true
+          }
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cuom2m5v5omnnkb7aut0",
+  "parent": "mig_cuom2hmfvuvgoi6as4pg",
+  "schema": "public",
+  "startedAt": "2025-02-16T03:54:00.667961Z"
+}
