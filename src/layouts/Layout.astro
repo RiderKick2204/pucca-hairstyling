@@ -36,40 +36,16 @@ import "../styles/global.css";
             <button
               type="button"
               id="mobile-menu-button"
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              class="relative inline-flex items-center justify-center w-12 h-12 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
               aria-expanded="false"
             >
               <span class="sr-only">Open main menu</span>
-              <!-- Hamburger icon -->
-              <svg
-                class="h-6 w-6 menu-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-              <!-- X icon -->
-              <svg
-                class="h-6 w-6 close-icon hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
+              <span class="menu-text absolute text-sm font-bold">MENU</span>
+              <div class="menu-icon relative w-6 h-6 opacity-0">
+                <span class="hamburger-line top-line"></span>
+                <span class="hamburger-line middle-line"></span>
+                <span class="hamburger-line bottom-line"></span>
+              </div>
             </button>
           </div>
 
@@ -94,8 +70,11 @@ import "../styles/global.css";
       </div>
 
       <!-- Mobile menu -->
-      <div id="mobile-menu" class="hidden md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1">
+      <div
+        id="mobile-menu"
+        class="hidden h-0 transition-all duration-300 ease-in-out overflow-hidden md:hidden"
+      >
+        <div class="px-2 py-3 space-y-1">
           <a href="/" class="block px-3 py-2 text-gray-700 hover:text-primary"
             >Home</a
           >
@@ -155,36 +134,131 @@ import "../styles/global.css";
   .navbar-scrolled {
     @apply bg-white/90 backdrop-blur-sm shadow-md;
   }
+
+  /* Hamburger menu icon styles */
+  .hamburger-line {
+    @apply absolute left-0 block h-0.5 w-6 transform bg-current transition duration-500 ease-in-out;
+  }
+
+  .top-line {
+    @apply top-0;
+  }
+
+  .middle-line {
+    @apply top-[10px];
+  }
+
+  .bottom-line {
+    @apply top-[20px];
+  }
+
+  /* Animation classes */
+  .menu-open .top-line {
+    @apply top-[10px] rotate-45;
+  }
+
+  .menu-open .middle-line {
+    @apply opacity-0;
+  }
+
+  .menu-open .bottom-line {
+    @apply top-[10px] -rotate-45;
+  }
+
+  /* Mobile menu animation */
+  .slide-enter {
+    @apply block;
+    height: 0;
+  }
+
+  .slide-enter-active {
+    height: var(--menu-height);
+  }
+
+  .slide-exit {
+    height: var(--menu-height);
+  }
+
+  .slide-exit-active {
+    height: 0;
+  }
+
+  /* Menu button states */
+  .menu-text {
+    @apply transition-opacity duration-500 ease-in-out;
+  }
+
+  .menu-icon {
+    @apply transition-opacity duration-500 ease-in-out;
+  }
+
+  .menu-open .menu-text {
+    @apply opacity-0;
+  }
+
+  .menu-open .menu-icon {
+    @apply opacity-100;
+  }
+
+  /* Update hamburger line styles to be relative to menu-icon */
+  .hamburger-line {
+    @apply absolute left-0 block h-0.5 w-6 transform bg-current transition duration-500 ease-in-out;
+  }
 </style>
 
 <script>
-  // Existing mobile menu script
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
+  document.addEventListener("DOMContentLoaded", () => {
+    const navbar = document.getElementById("navbar");
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuContent = mobileMenu?.querySelector("div");
 
-  if (mobileMenuButton && mobileMenu) {
-    const menuIcon = mobileMenuButton.querySelector(".menu-icon");
-    const closeIcon = mobileMenuButton.querySelector(".close-icon");
+    // Mobile menu toggle with animation
+    mobileMenuButton?.addEventListener("click", () => {
+      if (!mobileMenu || !menuContent) return;
 
-    mobileMenuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-      menuIcon?.classList.toggle("hidden");
-      closeIcon?.classList.toggle("hidden");
+      // Toggle the menu-open class on the button itself
+      mobileMenuButton.classList.toggle("menu-open");
+
+      const isHidden = mobileMenu.classList.contains("hidden");
+
+      if (isHidden) {
+        // Opening menu
+        mobileMenu.classList.remove("hidden");
+        // Set the height variable for animation
+        const height = menuContent.getBoundingClientRect().height;
+        mobileMenu.style.setProperty("--menu-height", `${height}px`);
+        // Trigger animation
+        requestAnimationFrame(() => {
+          mobileMenu.classList.add("slide-enter-active");
+        });
+      } else {
+        // Closing menu
+        mobileMenu.classList.remove("slide-enter-active");
+        // Add transition end listener to hide menu
+        const hideMenu = () => {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.removeEventListener("transitionend", hideMenu);
+        };
+        mobileMenu.addEventListener("transitionend", hideMenu);
+      }
+
+      // Toggle hamburger icon
+      mobileMenuButton.firstElementChild?.nextElementSibling?.classList.toggle(
+        "menu-open",
+      );
+      const isExpanded =
+        mobileMenuButton.getAttribute("aria-expanded") === "true";
+      mobileMenuButton.setAttribute("aria-expanded", (!isExpanded).toString());
     });
-  }
 
-  // Add sticky navbar behavior
-  const navbar = document.getElementById("navbar");
-  let lastScrollY = window.scrollY;
-
-  window.addEventListener("scroll", () => {
-    // Add or remove scrolled class based on scroll position
-    if (window.scrollY > 20) {
-      navbar?.classList.add("navbar-scrolled");
-    } else {
-      navbar?.classList.remove("navbar-scrolled");
-    }
-
-    lastScrollY = window.scrollY;
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+        navbar?.classList.add("navbar-scrolled");
+      } else {
+        navbar?.classList.remove("navbar-scrolled");
+      }
+    });
   });
 </script>
