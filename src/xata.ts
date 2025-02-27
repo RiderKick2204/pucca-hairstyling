@@ -91,6 +91,90 @@ const tables = [
       },
     ],
   },
+  {
+    name: "Services",
+    checkConstraints: {
+      Services_xata_id_length_xata_id: {
+        name: "Services_xata_id_length_xata_id",
+        columns: ["xata_id"],
+        definition: "CHECK ((length(xata_id) < 256))",
+      },
+    },
+    foreignKeys: {},
+    primaryKey: [],
+    uniqueConstraints: {
+      _pgroll_new_Services_xata_id_key: {
+        name: "_pgroll_new_Services_xata_id_key",
+        columns: ["xata_id"],
+      },
+    },
+    columns: [
+      {
+        name: "category",
+        type: "text",
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: "{}",
+      },
+      {
+        name: "hourly_rate",
+        type: "int",
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: "{}",
+      },
+      {
+        name: "name",
+        type: "text",
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: "{}",
+      },
+      {
+        name: "price",
+        type: "int",
+        notNull: false,
+        unique: false,
+        defaultValue: null,
+        comment: "{}",
+      },
+      {
+        name: "xata_createdat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_id",
+        type: "text",
+        notNull: true,
+        unique: true,
+        defaultValue: "('rec_'::text || (xata_private.xid())::text)",
+        comment: "",
+      },
+      {
+        name: "xata_updatedat",
+        type: "datetime",
+        notNull: true,
+        unique: false,
+        defaultValue: "now()",
+        comment: "",
+      },
+      {
+        name: "xata_version",
+        type: "int",
+        notNull: true,
+        unique: false,
+        defaultValue: "0",
+        comment: "",
+      },
+    ],
+  },
 ] as const;
 
 export type SchemaTables = typeof tables;
@@ -99,27 +183,20 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Product = InferredTypes["Product"];
 export type ProductRecord = Product & XataRecord;
 
+export type Services = InferredTypes["Services"];
+export type ServicesRecord = Services & XataRecord;
+
 export type DatabaseSchema = {
   Product: ProductRecord;
+  Services: ServicesRecord;
 };
 
 const DatabaseClient = buildClient();
 
-// Load environment variables
-const apiKey = import.meta.env.XATA_API_KEY ?? process.env.XATA_API_KEY;
-const dbURL = "https://An-s-workspace-k8uaf8.us-east-1.xata.sh/db/hairstyling";
-const branch = import.meta.env.XATA_BRANCH ?? process.env.XATA_BRANCH ?? "main";
-
-if (!apiKey) {
-  throw new Error(
-    "XATA_API_KEY is not defined. Please set it in your environment variables."
-  );
-}
-
 const defaultOptions = {
-  databaseURL: dbURL,
-  branch: branch,
-  apiKey: apiKey,
+  databaseURL: "https://An-s-workspace-k8uaf8.us-east-1.xata.sh/db/hairstyling",
+  apiKey: import.meta.env.XATA_API_KEY,
+  branch: import.meta.env.XATA_BRANCH,
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

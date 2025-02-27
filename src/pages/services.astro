@@ -1,59 +1,63 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getXataClient } from "../xata.ts";
 
-const services = [
-  {
-    name: "Haircut & Styling",
-    description:
-      "Professional haircut and styling tailored to your preferences",
-    duration: "60 min",
-    price: "$50+",
-    category: "General",
-  },
-  {
-    name: "Color & Highlights",
-    description: "Full color or highlighting services with premium products",
-    duration: "120 min",
-    price: "$100+",
-    category: "Color",
-  },
-  {
-    name: "Hair Treatment",
-    description: "Deep conditioning and specialized treatments for hair health",
-    duration: "45 min",
-    price: "$40+",
-    category: "General",
-  },
-  {
-    name: "Blowout",
-    description: "Professional blow dry and style",
-    duration: "45 min",
-    price: "$35+",
-    category: "General",
-  },
-  {
-    name: "Eyebrow Shaping",
-    description: "Professional eyebrow shaping and tinting",
-    duration: "30 min",
-    price: "$25+",
-    category: "Lashes&Brows",
-  },
-  {
-    name: "Eyelash Extensions",
-    description: "Full set of premium eyelash extensions",
-    duration: "90 min",
-    price: "$80+",
-    category: "Lashes&Brows",
-  },
-  {
-    name: "Hair Waxing",
-    description: "Professional hair removal services",
-    duration: "30 min",
-    price: "$30+",
-    category: "Wax",
-  },
-];
+// const services = [
+//   {
+//     name: "Haircut & Styling",
+//     description:
+//       "Professional haircut and styling tailored to your preferences",
+//     duration: "60 min",
+//     price: "$50+",
+//     category: "General",
+//   },
+//   {
+//     name: "Color & Highlights",
+//     description: "Full color or highlighting services with premium products",
+//     duration: "120 min",
+//     price: "$100+",
+//     category: "Color",
+//   },
+//   {
+//     name: "Hair Treatment",
+//     description: "Deep conditioning and specialized treatments for hair health",
+//     duration: "45 min",
+//     price: "$40+",
+//     category: "General",
+//   },
+//   {
+//     name: "Blowout",
+//     description: "Professional blow dry and style",
+//     duration: "45 min",
+//     price: "$35+",
+//     category: "General",
+//   },
+//   {
+//     name: "Eyebrow Shaping",
+//     description: "Professional eyebrow shaping and tinting",
+//     duration: "30 min",
+//     price: "$25+",
+//     category: "Lashes&Brows",
+//   },
+//   {
+//     name: "Eyelash Extensions",
+//     description: "Full set of premium eyelash extensions",
+//     duration: "90 min",
+//     price: "$80+",
+//     category: "Lashes&Brows",
+//   },
+//   {
+//     name: "Hair Waxing",
+//     description: "Professional hair removal services",
+//     duration: "30 min",
+//     price: "$30+",
+//     category: "Wax",
+//   },
+// ];
 
+// const categories = [...new Set(services.map((service) => service.category))];
+const xata = getXataClient();
+const services = await xata.db.Services.getAll();
 const categories = [...new Set(services.map((service) => service.category))];
 ---
 
@@ -93,12 +97,12 @@ const categories = [...new Set(services.map((service) => service.category))];
               data-category={service.category}
             >
               <h3 class="text-xl sm:text-2xl">{service.name}</h3>
-              <p class="text-gray-600 mb-4 text-sm sm:text-base">
+              {/* <p class="text-gray-600 mb-4 text-sm sm:text-base">
                 {service.description}
-              </p>
+              </p> */}
               <div class="flex flex-col sm:flex-row sm:justify-between text-sm text-gray-500">
-                <span class="mb-2 sm:mb-0">Duration: {service.duration}</span>
-                <span>Starting at {service.price}</span>
+                {/* <span class="mb-2 sm:mb-0">Duration: {service.duration}</span> */}
+                <span>Starting at ${service.price}</span>
               </div>
             </div>
           ))
@@ -255,13 +259,13 @@ const categories = [...new Set(services.map((service) => service.category))];
           // Store the booking data (you'll need to implement the backend storage)
           console.log("Booking data:", bookingData);
           alert(
-            "Thank you for booking! We will contact you shortly to confirm your appointment."
+            "Thank you for booking! We will contact you shortly to confirm your appointment.",
           );
           form.reset();
         } catch (error) {
           console.error("Error submitting booking:", error);
           alert(
-            "There was an error submitting your booking. Please try again."
+            "There was an error submitting your booking. Please try again.",
           );
         }
       });
