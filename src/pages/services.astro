@@ -2,64 +2,64 @@
 import Layout from "../layouts/Layout.astro";
 import { getXataClient } from "../xata.ts";
 
-const xata = getXataClient();
-const services = await xata.db.Services.getAll();
-const categories = [...new Set(services.map((service) => service.category))];
-
-// const services = [
-//   {
-//     name: "Haircut & Styling",
-//     description:
-//       "Professional haircut and styling tailored to your preferences",
-//     duration: "60 min",
-//     price: "$50+",
-//     category: "General",
-//   },
-//   {
-//     name: "Color & Highlights",
-//     description: "Full color or highlighting services with premium products",
-//     duration: "120 min",
-//     price: "$100+",
-//     category: "Color",
-//   },
-//   {
-//     name: "Hair Treatment",
-//     description: "Deep conditioning and specialized treatments for hair health",
-//     duration: "45 min",
-//     price: "$40+",
-//     category: "General",
-//   },
-//   {
-//     name: "Blowout",
-//     description: "Professional blow dry and style",
-//     duration: "45 min",
-//     price: "$35+",
-//     category: "General",
-//   },
-//   {
-//     name: "Eyebrow Shaping",
-//     description: "Professional eyebrow shaping and tinting",
-//     duration: "30 min",
-//     price: "$25+",
-//     category: "Lashes&Brows",
-//   },
-//   {
-//     name: "Eyelash Extensions",
-//     description: "Full set of premium eyelash extensions",
-//     duration: "90 min",
-//     price: "$80+",
-//     category: "Lashes&Brows",
-//   },
-//   {
-//     name: "Hair Waxing",
-//     description: "Professional hair removal services",
-//     duration: "30 min",
-//     price: "$30+",
-//     category: "Wax",
-//   },
-// ];
-
+// const xata = getXataClient();
+// const services = await xata.db.Services.getAll();
 // const categories = [...new Set(services.map((service) => service.category))];
+
+const services = [
+  {
+    name: "Haircut & Styling",
+    description:
+      "Professional haircut and styling tailored to your preferences",
+    duration: "60 min",
+    price: "$50+",
+    category: "General",
+  },
+  {
+    name: "Color & Highlights",
+    description: "Full color or highlighting services with premium products",
+    duration: "120 min",
+    price: "$100+",
+    category: "Color",
+  },
+  {
+    name: "Hair Treatment",
+    description: "Deep conditioning and specialized treatments for hair health",
+    duration: "45 min",
+    price: "$40+",
+    category: "General",
+  },
+  {
+    name: "Blowout",
+    description: "Professional blow dry and style",
+    duration: "45 min",
+    price: "$35+",
+    category: "General",
+  },
+  {
+    name: "Eyebrow Shaping",
+    description: "Professional eyebrow shaping and tinting",
+    duration: "30 min",
+    price: "$25+",
+    category: "Lashes&Brows",
+  },
+  {
+    name: "Eyelash Extensions",
+    description: "Full set of premium eyelash extensions",
+    duration: "90 min",
+    price: "$80+",
+    category: "Lashes&Brows",
+  },
+  {
+    name: "Hair Waxing",
+    description: "Professional hair removal services",
+    duration: "30 min",
+    price: "$30+",
+    category: "Wax",
+  },
+];
+
+const categories = [...new Set(services.map((service) => service.category))];
 ---
 
 <Layout
