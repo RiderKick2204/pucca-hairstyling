@@ -15,11 +15,13 @@ import "../styles/global.css";
     <title>{title} | Pucca Hairstyling</title>
     <link rel="icon" type="image/svg+xml" href="/hairstyling.svg" />
   </head>
-  <body class="min-h-screen bg-gray-50 flex flex-col">
+  <body
+    class="min-h-screen bg-gray-50 flex flex-col bg-[url(/background-image.png)] bg-cover"
+  >
     <!-- Make the nav sticky with transition -->
     <nav
       id="navbar"
-      class="bg-white shadow-md sticky top-0 z-40 transition-all duration-300"
+      class="bg-gray-100 shadow-md sticky top-0 z-40 transition-all duration-300 md:relative"
     >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">

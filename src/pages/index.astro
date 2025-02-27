@@ -9,19 +9,23 @@ import Layout from "../layouts/Layout.astro";
   title="Welcome"
   description="Experience the art of beautiful hair with Pucca Hairstyling. Book professional haircuts, styling, color, highlights, and hair treatments in our salon."
 >
-  <div class="bg-gradient-to-r from-primary to-secondary text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-24">
-      <div class="text-center">
-        <h1 class="text-4xl sm:text-5xl font-bold mb-4 sm:mb-6">
+  <div class="bg-[url(/banner.png)] bg-cover bg-center text-black">
+    <div
+      class="max-w-screen mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-24 bg-white bg-opacity-80"
+    >
+      <div class="text-center rounded-lg px-6 sm:max-w-[800px] mx-auto">
+        <h1
+          class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-purple-600 text-transparent bg-clip-text py-2"
+        >
           Welcome to Pucca Hairstyling
         </h1>
-        <p class="text-lg sm:text-xl mb-6 sm:mb-8">
+        <p class="text-lg sm:text-xl mb-6 sm:mb-8 text-black">
           Experience the art of beautiful hair with our professional styling
           services
         </p>
         <a
           href="/services"
-          class="btn bg-white text-primary hover:bg-gray-100 text-sm sm:text-base"
+          class="btn bg-white text-primary hover:bg-gray-100 text-sm sm:text-base border"
           >Book Now</a
         >
       </div>
