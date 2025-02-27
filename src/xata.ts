@@ -195,8 +195,8 @@ const DatabaseClient = buildClient();
 
 const defaultOptions = {
   databaseURL: "https://An-s-workspace-k8uaf8.us-east-1.xata.sh/db/hairstyling",
-  apiKey: import.meta.env.XATA_API_KEY,
-  branch: import.meta.env.XATA_BRANCH,
+  apiKey: process.env.XATA_API_KEY || '',
+  branch: process.env.XATA_BRANCH || 'main',
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {
