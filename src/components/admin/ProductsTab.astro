@@ -1,9 +1,12 @@
 ---
 // import { products } from "../../data/products";
 
-import { getXataClient } from "../../xata.ts";
+import { XataClient } from "../../xata";
 
-const xata = getXataClient();
+const xata = new XataClient({
+  apiKey: import.meta.env.XATA_API_KEY,
+  branch: import.meta.env.XATA_BRANCH,
+});
 const products = await xata.db.Product.getAll();
 ---
 

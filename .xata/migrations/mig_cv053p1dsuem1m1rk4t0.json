@@ -1,0 +1,81 @@
+{
+  "done": true,
+  "migration": {
+    "name": "mig_cv053p1dsuem1m1rk4t0",
+    "operations": [
+      {
+        "create_table": {
+          "name": "Services",
+          "columns": [
+            {
+              "name": "name",
+              "type": "text",
+              "comment": "{}",
+              "nullable": true
+            },
+            {
+              "name": "price",
+              "type": "integer",
+              "comment": "{}",
+              "nullable": true
+            },
+            {
+              "name": "hourly_rate",
+              "type": "integer",
+              "comment": "{}",
+              "nullable": true
+            },
+            {
+              "name": "category",
+              "type": "text",
+              "comment": "{}",
+              "nullable": true
+            },
+            {
+              "name": "xata_id",
+              "type": "text",
+              "check": {
+                "name": "Services_xata_id_length_xata_id",
+                "constraint": "length(\"xata_id\") < 256"
+              },
+              "unique": true,
+              "default": "'rec_' || xata_private.xid()"
+            },
+            {
+              "name": "xata_version",
+              "type": "integer",
+              "default": "0"
+            },
+            {
+              "name": "xata_createdat",
+              "type": "timestamptz",
+              "default": "now()"
+            },
+            {
+              "name": "xata_updatedat",
+              "type": "timestamptz",
+              "default": "now()"
+            }
+          ]
+        }
+      },
+      {
+        "sql": {
+          "up": "ALTER TABLE \"Services\" REPLICA IDENTITY FULL",
+          "onComplete": true
+        }
+      },
+      {
+        "sql": {
+          "up": "CREATE TRIGGER xata_maintain_metadata_trigger_pgroll\n  BEFORE INSERT OR UPDATE\n  ON \"Services\"\n  FOR EACH ROW\n  EXECUTE FUNCTION xata_private.maintain_metadata_trigger_pgroll()",
+          "onComplete": true
+        }
+      }
+    ]
+  },
+  "migrationType": "pgroll",
+  "name": "mig_cv053p1dsuem1m1rk4t0",
+  "parent": "mig_cuvt0qlv5omnnkb7crfg",
+  "schema": "public",
+  "startedAt": "2025-02-27T11:52:05.223045Z"
+}
