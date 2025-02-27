@@ -4,7 +4,7 @@ import ProductsTab from "../../components/admin/ProductsTab.astro";
 import ServicesTab from "../../components/admin/ServicesTab.astro";
 
 // In a real application, you would implement authentication here
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 // Get the active tab from URL parameter, default to dashboard
 const activeTab = Astro.url.searchParams.get("tab") || "dashboard";
